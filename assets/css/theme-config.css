@@ -5,9 +5,9 @@
   color-scheme: light;
 
   /* Map custom colors to DaisyUI semantic tokens */
-  --color-primary: #8611ed;           /* primary-500 */
+  --color-primary: #0000dc;           /* primary-500 */
   --color-primary-content: #ffffff;
-  --color-secondary: #140553;         /* secondary-500 */
+  --color-secondary: #0a1450;         /* secondary-500 */
   --color-secondary-content: #ffffff;
   --color-accent: #507DAA;            /* neutral-500 */
   --color-accent-content: #ffffff;
@@ -37,6 +37,41 @@
   --noise: 0;
 }
 
+@plugin "daisyui/theme" {
+  name: "claper-dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+  --color-primary: #5c5cff;
+  --color-primary-content: #ffffff;
+  --color-secondary: #3a75c3;
+  --color-secondary-content: #ffffff;
+  --color-accent: #f9dd17;
+  --color-accent-content: #1a1a00;
+  --color-neutral: #1f2937;
+  --color-neutral-content: #f3f4f6;
+  --color-base-100: #0b0d1f;
+  --color-base-200: #12152e;
+  --color-base-300: #1c2040;
+  --color-base-content: #e5e7f5;
+  --color-info: #79bfe2;
+  --color-info-content: #0e3649;
+  --color-success: #10B981;
+  --color-success-content: #064E3B;
+  --color-warning: #F59E0B;
+  --color-warning-content: #78350F;
+  --color-error: #E12D39;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
 @theme {
   /* Preserve custom CSS variables for non-DaisyUI usage */
   --font-display: "Montserrat", sans-serif;
@@ -61,29 +96,29 @@
   --text-body: 16px;
   --text-small-body: 14px;
 
-  /* Primary Colors - Claper Purple (from old theme.css) */
-  --color-primary-50: #f3defa;
-  --color-primary-100: #e8bef5;
-  --color-primary-200: #d08def;
-  --color-primary-300: #b85ce9;
-  --color-primary-400: #9f2be3;
-  --color-primary-500: #8611ed;
-  --color-primary-600: #6b0dbe;
-  --color-primary-700: #500a8e;
-  --color-primary-800: #35065f;
-  --color-primary-900: #1a032f;
+  /* Primary Colors - MUNI Blue */
+  --color-primary-50: #e5e5fb;
+  --color-primary-100: #c7c7f7;
+  --color-primary-200: #9999ef;
+  --color-primary-300: #6b6be7;
+  --color-primary-400: #3d3de0;
+  --color-primary-500: #0000dc;
+  --color-primary-600: #0000b0;
+  --color-primary-700: #000084;
+  --color-primary-800: #000058;
+  --color-primary-900: #00002c;
 
-  /* Secondary Colors - Navy Purple (from old theme.css) */
-  --color-secondary-50: #e8e6f0;
-  --color-secondary-100: #c5c0db;
-  --color-secondary-200: #9f97c2;
-  --color-secondary-300: #7a6ea9;
-  --color-secondary-400: #5d4f95;
-  --color-secondary-500: #140553;
-  --color-secondary-600: #100442;
-  --color-secondary-700: #0c0332;
-  --color-secondary-800: #080221;
-  --color-secondary-900: #040111;
+  /* Secondary Colors - MUNI Navy */
+  --color-secondary-50: #e6e8f0;
+  --color-secondary-100: #c2c6db;
+  --color-secondary-200: #949bc0;
+  --color-secondary-300: #6670a5;
+  --color-secondary-400: #384589;
+  --color-secondary-500: #0a1450;
+  --color-secondary-600: #081040;
+  --color-secondary-700: #060c30;
+  --color-secondary-800: #040820;
+  --color-secondary-900: #020410;
 
   /* Neutral Colors - Wedgewood (from old theme.css) */
   --color-neutral-50: #F0F4F8;

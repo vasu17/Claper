@@ -18,8 +18,8 @@ $amount: 20;
   animation-iteration-count: infinite;
   $colors: (
     #14bfdb,
-    #8611ed,
-    #b80fef
+    #0000dc,
+    #f9dd17
   );
   @for $i from 1 through $amount {
     &:nth-child(#{$i}) {
