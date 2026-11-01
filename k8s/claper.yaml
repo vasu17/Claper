@@ -29,7 +29,7 @@ spec:
           imagePullPolicy: Always
           ports: [{containerPort: 4000}]
           env:
-            - {name: BASE_URL, value: "https://claper-sundararaman.dyn.cloud.e-infra.cz"}
+            - {name: BASE_URL, value: "https://friday.seminar.dyn.cloud.e-infra.cz"}
             - {name: PORT, value: "4000"}
             - name: DB_PASSWORD
               valueFrom: {secretKeyRef: {name: claper-secrets, key: DB_PASSWORD}}
@@ -68,10 +68,10 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-    - hosts: [claper-sundararaman.dyn.cloud.e-infra.cz]
-      secretName: claper-sundararaman-dyn-cloud-e-infra-cz-tls
+    - hosts: [friday.seminar.dyn.cloud.e-infra.cz]
+      secretName: friday-seminar-dyn-cloud-e-infra-cz-tls
   rules:
-    - host: claper-sundararaman.dyn.cloud.e-infra.cz
+    - host: friday.seminar.dyn.cloud.e-infra.cz
       http:
         paths:
           - {path: /, pathType: Prefix, backend: {service: {name: claper, port: {number: 80}}}}
