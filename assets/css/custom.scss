@@ -42,3 +42,39 @@ $amount: 20;
   }
 }
 
+
+// Dark mode: many templates use hardcoded light utilities (bg-white, gray-*),
+// so remap them to the daisyUI dark theme tokens. Unlayered rules here win over
+// Tailwind's layered utilities; the admin layout pins data-theme="light".
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    .bg-white { background-color: var(--color-base-200); }
+    .bg-gray-50,
+    .bg-gray-100,
+    .hover\:bg-gray-100:hover,
+    .hover\:bg-gray-50:hover { background-color: var(--color-base-300); }
+    .bg-gray-200,
+    .hover\:bg-gray-200:hover { background-color: color-mix(in oklab, var(--color-base-300) 85%, white); }
+
+    .text-black,
+    .text-gray-900,
+    .text-gray-800,
+    .text-gray-700 { color: var(--color-base-content); }
+    .text-gray-600,
+    .text-gray-500 { color: color-mix(in oklab, var(--color-base-content) 72%, transparent); }
+    .text-gray-400 { color: color-mix(in oklab, var(--color-base-content) 55%, transparent); }
+
+    .border-gray-100,
+    .border-gray-200,
+    .border-gray-300,
+    .divide-gray-200 > :not(:last-child) { border-color: color-mix(in oklab, var(--color-base-content) 15%, transparent); }
+
+    input.bg-white,
+    textarea.bg-white,
+    select.bg-white { color: var(--color-base-content); }
+    ::placeholder { color: color-mix(in oklab, var(--color-base-content) 50%, transparent); }
+
+    // The dark-blue logo disappears on dark backgrounds; use the white variant.
+    img[src$="/images/logo.svg"] { content: url("/images/logo-white.svg"); }
+  }
+}
