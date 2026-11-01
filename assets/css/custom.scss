@@ -121,3 +121,21 @@ $amount: 20;
   // The dark-blue logo disappears on dark backgrounds; use the white variant.
   img[src$="/images/logo.svg"] { content: url("/images/logo-white.svg"); }
 }
+
+// Auth pages (login, register, reset, confirm) are authored as a dark design;
+// in light mode turn the form panel light so the theme toggle has an effect.
+:root[data-theme="claper"] .auth-panel {
+  background-color: #fff;
+
+  .text-white { color: #111827; }
+  .text-gray-300,
+  .text-gray-100\/90 { color: #4b5563; }
+  .text-primary-300,
+  .text-primary-200 { color: var(--color-primary-500, #0000dc); }
+  .hover\:text-primary-200:hover { color: var(--color-primary-700, #0000a0); }
+  .bg-gray-900\/80 { background-color: #f3f4f6; }
+  .border-white\/10 { border-color: rgba(17, 24, 39, 0.15); }
+  .border-secondary-500\/70 { border-color: rgba(10, 20, 80, 0.4); }
+  .hover\:bg-secondary-500\/20:hover { background-color: rgba(10, 20, 80, 0.08); }
+  ::placeholder { color: #6b7280; }
+}
