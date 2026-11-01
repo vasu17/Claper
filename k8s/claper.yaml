@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: claper-uploads
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: csi-ceph-rbd-du
+  resources:
+    requests: {storage: 5Gi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: claper
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: claper}
+  template:
+    metadata:
+      labels: {app: claper}
+    spec:
+      imagePullSecrets:
+        - name: ghcr-pull
+      containers:
+        - name: claper
+          image: ghcr.io/vasu17/claper:latest
+          imagePullPolicy: Always
+          ports: [{containerPort: 4000}]
+          env:
+            - {name: BASE_URL, value: "https://claper-sundararaman.dyn.cloud.e-infra.cz"}
+            - {name: PORT, value: "4000"}
+            - name: DB_PASSWORD
+              valueFrom: {secretKeyRef: {name: claper-secrets, key: DB_PASSWORD}}
+            - name: DATABASE_URL
+              value: "postgres://claper:$(DB_PASSWORD)@claper-db:5432/claper"
+            - name: SECRET_KEY_BASE
+              valueFrom: {secretKeyRef: {name: claper-secrets, key: SECRET_KEY_BASE}}
+          resources:
+            requests: {cpu: 500m, memory: 1Gi}
+            limits: {cpu: "2", memory: 2Gi}
+          readinessProbe:
+            tcpSocket: {port: 4000}
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          volumeMounts:
+            - {name: uploads, mountPath: /app/uploads}
+      volumes:
+        - name: uploads
+          persistentVolumeClaim: {claimName: claper-uploads}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: claper
+spec:
+  selector: {app: claper}
+  ports: [{port: 80, targetPort: 4000}]
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: claper
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 64m
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: [claper-sundararaman.dyn.cloud.e-infra.cz]
+      secretName: claper-sundararaman-dyn-cloud-e-infra-cz-tls
+  rules:
+    - host: claper-sundararaman.dyn.cloud.e-infra.cz
+      http:
+        paths:
+          - {path: /, pathType: Prefix, backend: {service: {name: claper, port: {number: 80}}}}
