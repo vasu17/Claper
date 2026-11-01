@@ -38,6 +38,7 @@ spec:
             - {name: BASE_URL, value: "https://friday.seminar.dyn.cloud.e-infra.cz"}
             - {name: PORT, value: "4000"}
             - {name: HOME, value: /tmp}
+            - {name: POOL_SIZE, value: "5"}
             - name: DB_PASSWORD
               valueFrom: {secretKeyRef: {name: claper-secrets, key: DB_PASSWORD}}
             - name: DATABASE_URL
@@ -45,8 +46,8 @@ spec:
             - name: SECRET_KEY_BASE
               valueFrom: {secretKeyRef: {name: claper-secrets, key: SECRET_KEY_BASE}}
           resources:
-            requests: {cpu: 500m, memory: 1Gi}
-            limits: {cpu: "2", memory: 2Gi}
+            requests: {cpu: 50m, memory: 300Mi}
+            limits: {cpu: "1", memory: 1Gi}
           readinessProbe:
             tcpSocket: {port: 4000}
             initialDelaySeconds: 20

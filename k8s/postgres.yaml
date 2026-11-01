@@ -27,8 +27,8 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom: {secretKeyRef: {name: claper-secrets, key: DB_PASSWORD}}
           resources:
-            requests: {cpu: 200m, memory: 256Mi}
-            limits: {cpu: "1", memory: 1Gi}
+            requests: {cpu: 20m, memory: 128Mi}
+            limits: {cpu: 500m, memory: 512Mi}
           securityContext:
             allowPrivilegeEscalation: false
             capabilities: {drop: [ALL]}
